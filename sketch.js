@@ -5,6 +5,10 @@ const rPonteiroH = 150;
 const rPonteiroM = 180;
 const anguloPonteiroH = 90;
 const anguloPonteiroM = 180;
+const bH = 10;
+const hH = 5;
+const bM = 10;
+const hM = 5;
 var numeros;
 function setup() {
     createCanvas(600, 600)
@@ -20,7 +24,6 @@ function setup() {
 function draw() {
     background(222)
     ellipse(cx, cy, rMolde)
-    ellipse(cx, cy, 20)
     for (var angulo = 0; angulo <= 360; angulo += 6) {
         var x1 = cos(radians(angulo)) * rRelogio;
         var y1 = sin(radians(angulo)) * rRelogio
@@ -33,21 +36,25 @@ function draw() {
             line(cx + x2, cy + y2, cx + x1, cy + y1)
         }
     }
-
+    
+    push()
+    strokeWeight(6)
+    stroke(255, 0, 0)
+    var mx = cos(radians(anguloPonteiroM)) * rPonteiroM;
+    var my = sin(radians(anguloPonteiroM)) * rPonteiroM;
+    line(cx, cy, cx + mx, cy + my)
+    triangle(cx + mx, cy + my + bM/2, cx + mx - hM, cy + my, cx + mx, cy + my - bM/2)
+    pop()
+    
     push()
     strokeWeight(10)
     var hx = cos(radians(anguloPonteiroH)) * rPonteiroH;
     var hy = sin(radians(anguloPonteiroH)) * rPonteiroH;
     line(cx, cy, cx + hx, cy + hy)
-    // triangle()
+    triangle(cx + hx - bH/2, cy + hy, cx + hx, cy + hy + hH, cx + hx + bH/2, cy + hy)
     pop()
-    push()
-    strokeWeight(6)
-    var mx = cos(radians(anguloPonteiroM)) * rPonteiroM;
-    var my = sin(radians(anguloPonteiroM)) * rPonteiroM;
-    line(cx, cy, cx + mx, cy + my)
-    // triangle()
-    pop()
+    ellipse(cx, cy, 20)
+    
 
 
 }
